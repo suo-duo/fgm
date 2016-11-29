@@ -27,5 +27,8 @@
 *.exe
 *.out
 *.app
+
+# Other garbage
 .idea
 .DS_Store
+build
