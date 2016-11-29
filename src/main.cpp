@@ -10,13 +10,13 @@ int main() {
 
     // load texture (spritesheet)
     sf::Texture playerTexture;
-    if (!playerTexture.loadFromFile("./player.png")) {
+    if (!playerTexture.loadFromFile("./assets/img/player.png")) {
         std::cout << "Failed to load player spritesheet!" << std::endl;
         return 1;
     }
 
     sf::Texture caravanTexture;
-    if (!caravanTexture.loadFromFile("./caravan.png")) {
+    if (!caravanTexture.loadFromFile("./assets/img/caravan.png")) {
         std::cout << "Failed to load caravan spritesheet!" << std::endl;
         return 1;
     }
@@ -27,16 +27,16 @@ int main() {
     Animation walkingAnimationRight;
     Animation walkingAnimationUp;
 
-    walkingAnimationDown.setSpriteSheet(caravanTexture);
-    walkingAnimationLeft.setSpriteSheet(caravanTexture);
-    walkingAnimationRight.setSpriteSheet(caravanTexture);
-    walkingAnimationUp.setSpriteSheet(caravanTexture);
+//    walkingAnimationDown.setSpriteSheet(caravanTexture);
+//    walkingAnimationLeft.setSpriteSheet(caravanTexture);
+//    walkingAnimationRight.setSpriteSheet(caravanTexture);
+//    walkingAnimationUp.setSpriteSheet(caravanTexture);
+//
+//    walkingAnimationDown.addFrame(sf::IntRect(48, 0, 48, 28));
+//    walkingAnimationLeft.addFrame(sf::IntRect(48, 0, 48, 28));
+//    walkingAnimationRight.addFrame(sf::IntRect(0, 0, 48, 28));
+//    walkingAnimationUp.addFrame(sf::IntRect(0, 0, 48, 28));
 
-    walkingAnimationDown.addFrame(sf::IntRect(48, 0, 48, 28));
-    walkingAnimationLeft.addFrame(sf::IntRect(48, 0, 48, 28));
-    walkingAnimationRight.addFrame(sf::IntRect(0, 0, 48, 28));
-    walkingAnimationUp.addFrame(sf::IntRect(0, 0, 48, 28));
-    /*
     walkingAnimationDown.setSpriteSheet(playerTexture);
     walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
     walkingAnimationDown.addFrame(sf::IntRect(64, 0, 32, 32));
@@ -60,7 +60,6 @@ int main() {
     walkingAnimationUp.addFrame(sf::IntRect(64, 96, 32, 32));
     walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
     walkingAnimationUp.addFrame(sf::IntRect( 0, 96, 32, 32));
-     */
 
     Animation* currentAnimation = &walkingAnimationDown;
 
