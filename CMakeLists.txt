@@ -3,10 +3,7 @@ project (fgm)
 
 # Set target name and source files
 set (TARGET_NAME ${CMAKE_PROJECT_NAME})
-set (SOURCE_FILES
-        src/main.cpp
-        src/AnimatedSprite.cpp
-        src/Animation.cpp)
+file (GLOB SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/**)
 
 # Define executable
 add_executable (${TARGET_NAME} ${SOURCE_FILES})
