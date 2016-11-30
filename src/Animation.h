@@ -24,9 +24,9 @@
 #ifndef ANIMATION_INCLUDE
 #define ANIMATION_INCLUDE
 
-#include <vector>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <vector>
 
 class Animation
 {
