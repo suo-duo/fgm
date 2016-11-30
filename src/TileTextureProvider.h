@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <SFML/Graphics.hpp>
 
+namespace fgm {
+
 
 enum class TileType { LAVA, DIRT, GRASS, STONE };
 
@@ -20,3 +22,4 @@ public:
 private:
   std::unordered_map<TileType, sf::Texture> tileSpriteMap_;
 };
+}

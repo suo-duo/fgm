@@ -2,14 +2,15 @@
 
 #include <boost/filesystem.hpp>
 #include <folly/Singleton.h>
+namespace fgm {
 
 namespace {
-
 static const std::string tilePath = "./assets/img/tiles/";
 folly::Singleton<TileTextureProvider> tileTextureProvider([]() {
   return new TileTextureProvider();
 });
 }
+
 
 TileTextureProvider::TileTextureProvider() {
   // Get the path to the tile images on disk
@@ -55,4 +56,5 @@ sf::Texture& TileTextureProvider::getTileTexture(const TileType tileType) {
   }
 
   return tileSpriteMap_.at(tileType);
+}
 }

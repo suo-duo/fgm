@@ -1,8 +1,10 @@
 #include "WorldGrid.h"
-#include <string>
 #include <folly/Format.h>
 #include <folly/Singleton.h>
 #include <iostream>
+#include <string>
+
+namespace fgm {
 
 WorldTile::WorldTile(const grid_t x,
                      const grid_t y,
@@ -50,4 +52,5 @@ WorldTile& WorldGrid::get(const grid_t x, const grid_t y) {
   }
 
   return grid_.at(y).at(x);
+}
 }

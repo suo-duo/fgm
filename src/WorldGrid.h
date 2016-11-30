@@ -6,6 +6,8 @@
 #include <utility>
 #include <vector>
 
+namespace fgm {
+
 using grid_t = uint32_t;
 
 class WorldTile : public sf::Drawable {
@@ -68,3 +70,4 @@ private:
   size_t pixelsPerTileEdge_;
   TileTextureProvider tileTextureProvider_;
 };
+}
