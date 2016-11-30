@@ -7,59 +7,67 @@
 #include <utility>
 #include <vector>
 
-static const std::string tilePath = "./assets/img/tiles/";
-
 using grid_t = uint32_t;
 
-enum class TileType { LAVA, GRASS };
+enum class TileType { LAVA, DIRT, GRASS, STONE };
 
-class TileSpriteProvider {
+class TileTextureProvider {
 public:
-  TileSpriteProvider() {
-    const auto path = boost::filesystem::path(tilePath);
-    auto dirIter = boost::filesystem::directory_iterator(path);
-    for (const auto dirEntry : dirIter) {
-      const auto path = dirEntry.path();
-      if (boost::filesystem::is_regular_file(path)) {
-        sf::Texture texture;
-        if (!texture.loadFromFile(path.string())) {
-          throw std::runtime_error("Failed to load texture from path: " +
-                                   path.string());
-        }
+  TileTextureProvider();
 
-        sf::Sprite sprite;
-        sprite.setTexture(texture);
+  sf::Texture& getTileTexture(const TileType tileType);
 
-        TileType tileType;
-        const auto fileName = path.filename().string();
-        if (fileName == "lava.png") {
-          assert(tileSpriteMap_.count(TileType::LAVA) == 0);
-          tileSpriteMap_[TileType::LAVA] = sprite;
-        } else {
-          //
-        }
-      }
-    }
+private:
+  std::unordered_map<TileType, sf::Texture> tileSpriteMap_;
+};
 
-    // sf::Texture playerTexture;
-    // if (!playerTexture.loadFromFile("./assets/img/player.png")) {
-    // }
+class WorldTile : public sf::Drawable {
+public:
+  WorldTile(grid_t x, grid_t y, TileType type, size_t pixelsPerTileEdge);
+
+  void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
+    target.draw(sprite_, states);
   }
 
 private:
-  std::unordered_map<TileType, sf::Sprite> tileSpriteMap_;
+  grid_t x_;
+  grid_t y_;
+  TileType type_;
+  sf::Sprite sprite_;
 };
 
-struct WorldTile {
-  grid_t x;
-  grid_t y;
-};
+/**
+ * Core abstraction for the world grid. Stores tiles.
+ *
+ * Dimsions are X and Y. Origin is top left, going down is positive Y, going
+ * right is positive X.
+ */
+class WorldGrid : public sf::Drawable {
+public:
+  // TODO delete copy constructor
+  WorldGrid(size_t widthInPixels,
+            size_t heightInPixels,
+            size_t pixelsPerTileEdge);
 
-class WorldGrid {
-  WorldGrid(size_t x, size_t y);
+  WorldTile& get(grid_t x, grid_t y);
 
-  WorldTile& get(size_t x, size_t y);
+  void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
+    for (auto& row : grid_) {
+      for (auto& tile : row) {
+        tile.draw(target, states);
+      }
+    }
+  }
+
+  grid_t height() { return grid_.size(); }
+  grid_t width() { return grid_.at(0).size(); };
 
 private:
+  // Height (y) is the outer vector
+  // Width (x) is the inner vector
   std::vector<std::vector<WorldTile>> grid_;
+
+  // Pixel per tile edge
+  size_t pixelsPerTileEdge_;
+  TileTextureProvider tileTextureProvider_;
 };

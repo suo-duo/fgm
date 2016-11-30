@@ -8,8 +8,7 @@ set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set (CMAKE_CXX_STANDARD 14)
 
 # Set compiler flags
-# SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} " )
-
+set (CMAKE_BUILD_TYPE Debug)
 
 # Set target name and source files
 set (TARGET_NAME ${CMAKE_PROJECT_NAME})
@@ -27,6 +26,7 @@ target_link_libraries (
   folly
   boost_filesystem
   boost_system
+  glog
 )
 
 # Copy assets directory

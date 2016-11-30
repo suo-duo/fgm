@@ -1,21 +1,19 @@
 #include "AnimatedSprite.h"
-#include <SFML/Graphics.hpp>
 #include "WorldGrid.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
+int main() {
   // setup window
-  sf::Vector2i screenDimensions(800, 600);
+  size_t xPixels = 800;
+  size_t yPixels = 600;
+  sf::Vector2i screenDimensions(xPixels, yPixels);
   sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y),
                           "Animations!");
   window.setFramerateLimit(60);
 
-  sf::Texture grassTexture;
-  if (!grassTexture.loadFromFile("./assets/img/tiles/grass.png")) {
-    std::cout << "Failed to load grass spritesheet!" << std::endl;
-    return 1;
-  }
-
-  sf::Sprite grassSprite;
-  grassSprite.setTexture(grassTexture);
+  const auto pixelsPerTileEdge = 50;
+  const auto worldGrid = WorldGrid(xPixels, yPixels, pixelsPerTileEdge);
 
   // load texture (spritesheet)
   sf::Texture playerTexture;
@@ -133,9 +131,9 @@
 
     // draw
     window.clear();
-    window.draw(animatedSprite);
 
-    window.draw(grassSprite);
+    window.draw(worldGrid);
+    window.draw(animatedSprite);
 
     window.display();
   }
