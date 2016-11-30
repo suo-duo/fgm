@@ -1,6 +1,8 @@
 #include "WorldGrid.h"
+#include <string>
 #include <folly/Format.h>
 #include <folly/Singleton.h>
+#include <iostream>
 
 WorldTile::WorldTile(const grid_t x,
                      const grid_t y,
