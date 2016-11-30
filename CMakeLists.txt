@@ -1,6 +1,9 @@
 cmake_minimum_required (VERSION 3.0)
 project (fgm)
 
+# Export compile commands
+set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Set target name and source files
 set (TARGET_NAME ${CMAKE_PROJECT_NAME})
 set (SOURCE_FILES
