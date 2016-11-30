@@ -1,6 +1,8 @@
 #include "WorldGrid.h"
+#include <string>
 #include <folly/Format.h>
 #include <folly/Singleton.h>
+#include <iostream>
 
 namespace {
 
@@ -64,9 +66,10 @@ TileTextureProvider::TileTextureProvider() {
   auto dirIter = boost::filesystem::directory_iterator(path);
   for (const auto dirEntry : dirIter) {
     const auto path = dirEntry.path();
-    if (boost::filesystem::is_regular_file(path)) {
+    if (boost::filesystem::is_regular_file(path) && path.string().find("png") != std::string::npos) {
       // Load texture
       sf::Texture texture;
+
       if (!texture.loadFromFile(path.string())) {
         throw std::runtime_error("Failed to load texture from path: " +
                                  path.string());
