@@ -4,6 +4,12 @@
 #include <memory>
 #include <mutex>
 
+// TODO: Add static receiver ID as counter to Updateable
+// TODO: Add processMessage to Updateable
+// TODO: Add Message class that contains senderID, receiverID, and MessageType
+// TODO: Add MCMP queue (folly) of Messages to Update manager
+// TODO: On update loop, processMessages, call processMessage for appropriate receivers
+
 namespace fgm {
 class Updateable {
 public:
