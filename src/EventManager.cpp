@@ -2,13 +2,22 @@
 
 namespace fgm {
 
-void EventManager::processEvent(sf::RenderWindow& window,
-                                const sf::Event& event,
-                                const sf::Time& frameTime) {
+void EventManager::processEvent(sf::RenderWindow& window) {
   std::lock_guard<std::mutex> lock(eventablesMutex_);
-  if (event.type == sf::Event::Closed) {
-    window.close();
-    return;
+
+  sf::Time frameTime = clock_.restart();
+  sf::Event event;
+
+  while (window.pollEvent(event)) {
+    if (event.type == sf::Event::Closed) {
+      window.close();
+      return;
+    }
+    if (event.type == sf::Event::KeyPressed &&
+        event.key.code == sf::Keyboard::Escape) {
+      window.close();
+      return;
+    }
   }
 
   for (auto& eventable : eventables_) {

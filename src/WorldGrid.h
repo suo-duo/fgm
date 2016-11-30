@@ -68,6 +68,5 @@ private:
 
   // Pixel per tile edge
   size_t pixelsPerTileEdge_;
-  TileTextureProvider tileTextureProvider_;
 };
 }

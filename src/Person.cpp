@@ -12,6 +12,7 @@ sf::Texture prepTexture() {
 
   return playerTexture;
 }
+
 Animations prepAnimations(const sf::Texture& playerTexture) {
   // set up the animations for all four directions (set spritesheet and push
   // frames)
@@ -43,7 +44,7 @@ Animations prepAnimations(const sf::Texture& playerTexture) {
 
   return animations;
 }
-} //anonymous
+} // anonymous
 
 Person::Person()
     : texture_(prepTexture()), animations_(prepAnimations(texture_)),
@@ -61,41 +62,44 @@ void Person::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void Person::processEvent(const sf::Event& event, const sf::Time& frameTime) {
-  bool isKeyPressed = true;
+  bool noKeyWasPressed = true;
+  sf::Vector2f movement(0.f, 0.f);
+
   if (event.type == sf::Event::KeyPressed) {
+    noKeyWasPressed = false;
     switch (event.key.code) {
     case sf::Keyboard::Up:
       curAnimation_ = animations_.up;
-      movement_.y -= speed_;
+      movement.y -= speed_;
       break;
     case sf::Keyboard::Down:
       curAnimation_ = animations_.down;
-      movement_.y += speed_;
+      movement.y += speed_;
       break;
     case sf::Keyboard::Left:
       curAnimation_ = animations_.left;
-      movement_.x -= speed_;
+      movement.x -= speed_;
       break;
     case sf::Keyboard::Right:
       curAnimation_ = animations_.right;
-      movement_.x += speed_;
+      movement.x += speed_;
       break;
     default:
-      isKeyPressed = false;
+      noKeyWasPressed = true;
       break;
     }
-  } else {
-    isKeyPressed = false;
-  }
-
-  if (!isKeyPressed) {
-    sprite_.stop();
   }
 
   sprite_.play(curAnimation_);
-  sprite_.move(movement_ * frameTime.asSeconds());
+  sprite_.move(movement * frameTime.asSeconds());
+
+  if (noKeyWasPressed) {
+    sprite_.stop();
+  }
+
   sprite_.update(frameTime);
 }
+
 void Person::update() {
   hunger_++;
   sleepiness_++;

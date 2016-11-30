@@ -20,14 +20,13 @@ public:
   EventManager(EventManager&&) = default;
   EventManager& operator=(EventManager&&) = default;
 
-  void processEvent(sf::RenderWindow& window,
-                    const sf::Event& event,
-                    const sf::Time& frameTime);
+  void processEvent(sf::RenderWindow& window);
 
   void add(std::shared_ptr<Eventable> eventable);
 
 private:
   std::vector<std::shared_ptr<Eventable>> eventables_;
   std::mutex eventablesMutex_;
+  sf::Clock clock_;
 };
 }

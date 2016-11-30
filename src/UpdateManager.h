@@ -24,5 +24,6 @@ public:
 private:
   std::vector<std::shared_ptr<Updateable>> updateables_;
   std::mutex updateablesMutex_;
+  sf::Clock clock_;
 };
 }

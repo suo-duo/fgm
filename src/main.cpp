@@ -16,8 +16,8 @@ int main() {
   window.setFramerateLimit(60);
 
   const auto pixelsPerTileEdge = 50;
-  const auto worldGrid = WorldGrid(xPixels, yPixels, pixelsPerTileEdge);
-
+  const auto worldGrid =
+      std::make_shared<WorldGrid>(xPixels, yPixels, pixelsPerTileEdge);
 
   sf::Texture caravanTexture;
   if (!caravanTexture.loadFromFile("./assets/img/caravan.png")) {
@@ -25,46 +25,22 @@ int main() {
     return 1;
   }
 
-  sf::Clock frameClock;
-  sf::Clock updateClock;
-
-  float speed = 80.f;
-  bool noKeyWasPressed = true;
-
-
   auto person = std::make_shared<Person>();
 
-  UpdateManager registry;
-  registry.add(person);
+  UpdateManager updateManager;
+  updateManager.add(person);
 
   EventManager eventManager;
   eventManager.add(person);
 
   DrawManager drawManager;
+  drawManager.add(worldGrid);
   drawManager.add(person);
 
   while (window.isOpen()) {
-    sf::Time frameTime = frameClock.restart();
-
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      eventManager.processEvent(window, event, frameTime);
-    }
-
-    // draw
-    window.clear();
-
-    const bool shouldUpdate =
-        updateClock.getElapsedTime() > sf::milliseconds(100);
-    if (shouldUpdate) {
-      registry.update();
-      updateClock.restart();
-    }
-
-    window.draw(worldGrid);
+    eventManager.processEvent(window);
+    updateManager.update();
     drawManager.draw(window);
-
-    window.display();
   }
 
   return 0;
