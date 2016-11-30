@@ -1,5 +1,6 @@
 #include "AnimatedSprite.h"
 #include "WorldGrid.h"
+#include "Person.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
