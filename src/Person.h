@@ -31,6 +31,8 @@ public:
   void processEvent(const sf::Event& event, const sf::Time& frameTime) override;
 
 private:
+  // TODO: everyone is named Bernard for now. Would be neat to have name generator.
+  std::string name_ = "Bernard";
   stat_t health_ = kStatMax;
   stat_t hunger_ = 0;
   stat_t sleepiness_ = 0;

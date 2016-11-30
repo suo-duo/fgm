@@ -5,7 +5,6 @@ namespace fgm {
 void EventManager::processEvent(sf::RenderWindow& window) {
   std::lock_guard<std::mutex> lock(eventablesMutex_);
 
-  sf::Time frameTime = clock_.restart();
   sf::Event event;
 
   while (window.pollEvent(event)) {
@@ -20,6 +19,7 @@ void EventManager::processEvent(sf::RenderWindow& window) {
     }
   }
 
+  sf::Time frameTime = clock_.restart();
   for (auto& eventable : eventables_) {
     eventable->processEvent(event, frameTime);
   }
