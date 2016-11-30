@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AnimatedSprite.h"
-#include "DrawManager.h"
+#include "RenderManager.h"
 #include "EventManager.h"
 #include "UpdateManager.h"
 #include <SFML/Graphics.hpp>
@@ -18,7 +18,7 @@ struct Animations {
 using stat_t = uint64_t;
 static constexpr stat_t kStatMax = 100;
 
-class Person : public Updateable, public Eventable, public sf::Drawable {
+class Person : public Updateable, public Eventable, public Renderable {
 public:
   Person();
   Person(const Person&) = delete;

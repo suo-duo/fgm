@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RenderManager.h"
 #include "TileTextureProvider.h"
 #include <SFML/Graphics.hpp>
 #include <cstddef>
@@ -36,7 +37,7 @@ private:
  * Dimsions are X and Y. Origin is top left, going down is positive Y, going
  * right is positive X.
  */
-class WorldGrid : public sf::Drawable {
+class WorldGrid : public Renderable {
 public:
   // TODO delete copy constructor
   WorldGrid(size_t widthInPixels,

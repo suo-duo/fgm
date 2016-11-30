@@ -33,14 +33,14 @@ int main() {
   EventManager eventManager;
   eventManager.add(person);
 
-  DrawManager drawManager;
-  drawManager.add(worldGrid);
-  drawManager.add(person);
+  RenderManager renderManager;
+  renderManager.add(worldGrid);
+  renderManager.add(person);
 
   while (window.isOpen()) {
     eventManager.processEvent(window);
     updateManager.update();
-    drawManager.draw(window);
+    renderManager.render(window);
   }
 
   return 0;
