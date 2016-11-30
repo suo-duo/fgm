@@ -6,7 +6,6 @@
 #include "UpdateManager.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include <mutex>
 
 namespace fgm {
 struct Animations {
@@ -32,7 +31,7 @@ public:
 
 private:
   // TODO: everyone is named Bernard for now. Would be neat to have name generator.
-  std::string name_ = "Bernard";
+  const std::string name_ = "Bernard";
   stat_t health_ = kStatMax;
   stat_t hunger_ = 0;
   stat_t sleepiness_ = 0;
