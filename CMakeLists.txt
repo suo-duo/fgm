@@ -18,7 +18,7 @@ add_executable (${TARGET_NAME} ${SOURCE_FILES})
 target_link_libraries (${TARGET_NAME} sfml-system sfml-window sfml-graphics folly)
 
 # Copy assets directory
-add_custom_command(
+add_custom_command (
         TARGET ${TARGET_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/assets
