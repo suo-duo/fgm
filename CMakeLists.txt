@@ -5,7 +5,9 @@ project (fgm)
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Set C++14
-set (CMAKE_CXX_STANDARD 14)
+
+set (CMAKE_CXX_COMPILER /usr/bin/clang++)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++14")
 
 # Set compiler flags
 set (CMAKE_BUILD_TYPE Debug)

@@ -1,29 +1,21 @@
 #pragma once
 
+#include "TileTextureProvider.h"
 #include <SFML/Graphics.hpp>
-#include <boost/filesystem.hpp>
 #include <cstddef>
-#include <unordered_map>
 #include <utility>
 #include <vector>
 
 using grid_t = uint32_t;
 
-enum class TileType { LAVA, DIRT, GRASS, STONE };
-
-class TileTextureProvider {
-public:
-  TileTextureProvider();
-
-  sf::Texture& getTileTexture(const TileType tileType);
-
-private:
-  std::unordered_map<TileType, sf::Texture> tileSpriteMap_;
-};
-
 class WorldTile : public sf::Drawable {
 public:
   WorldTile(grid_t x, grid_t y, TileType type, size_t pixelsPerTileEdge);
+
+  WorldTile(const WorldTile&) = delete;
+  WorldTile& operator=(const WorldTile&) = delete;
+  WorldTile(WorldTile&&) = default;
+  WorldTile& operator=(WorldTile&&) = default;
 
   void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
     target.draw(sprite_, states);
@@ -48,6 +40,11 @@ public:
   WorldGrid(size_t widthInPixels,
             size_t heightInPixels,
             size_t pixelsPerTileEdge);
+
+  WorldGrid(const WorldGrid&) = delete;
+  WorldGrid& operator=(const WorldGrid&) = delete;
+  WorldGrid(WorldGrid&&) = default;
+  WorldGrid& operator=(WorldGrid&&) = default;
 
   WorldTile& get(grid_t x, grid_t y);
 
