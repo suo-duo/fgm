@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.h"
+#include <folly/futures/Future.h>
 #include <iostream>
 
 int main() {

@@ -1,8 +1,11 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.2)
 project (fgm)
 
 # Export compile commands
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Set C++14
+set (CMAKE_CXX_STANDARD 14)
 
 # Set target name and source files
 set (TARGET_NAME ${CMAKE_PROJECT_NAME})
@@ -12,7 +15,7 @@ file (GLOB SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/**)
 add_executable (${TARGET_NAME} ${SOURCE_FILES})
 
 # Link libraries
-target_link_libraries (${TARGET_NAME} sfml-system sfml-window sfml-graphics)
+target_link_libraries (${TARGET_NAME} sfml-system sfml-window sfml-graphics folly)
 
 # Copy assets directory
 add_custom_command(

@@ -4,7 +4,7 @@
 
 1. Blindly copy-paste the following commands into terminal (assumes OS X and homebrew)
 ```
-brew install cmake sfml
+brew install cmake sfml folly
 git clone https://github.com/suo/fgm
 cd fgm
 mkdir build && cd build
